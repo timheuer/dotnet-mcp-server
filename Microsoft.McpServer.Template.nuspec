@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>Microsoft.DotNet.MCP.Server.Template</id>
-    <version>1.0.0-preview</version>
+    <id>Microsoft.McpServer.Template</id>
+    <version>0.1.0-preview</version>
     <title>MCP Server Template for .NET</title>
     <authors>Microsoft</authors>
     <owners>Microsoft</owners>
@@ -42,7 +42,8 @@
     <file src="McpServerTemplate.csproj" target="content\" />
     <file src="Tools\**\*.cs" target="content\Tools\" />
     <file src="Prompts\**\*.cs" target="content\Prompts\" />
-    
+    <file src="Directory.Packages.props" target="content\" />
+
     <!-- Documentation and configuration -->
     <file src="sample-mcp-config.json" target="content\" />
     <file src=".gitignore" target="content\" />

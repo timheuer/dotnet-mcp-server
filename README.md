@@ -15,8 +15,19 @@ dotnet new install Microsoft.DotNet.MCP.Server.Template
 
 ### Create Your MCP Server
 
+**Standard (StdIO) MCP Server:**
+
 ```bash
 dotnet new mcpserver -n MyMcpServer
+cd MyMcpServer
+dotnet build
+dotnet run
+```
+
+**HTTP-based MCP Server:**
+
+```bash
+dotnet new mcpserver -n MyMcpServer --EnableHttpTransport true
 cd MyMcpServer
 dotnet build
 dotnet run
@@ -34,6 +45,24 @@ dotnet run
 - ✅ **Security Best Practices** with file access restrictions
 
 ## 🛠 Template Features
+
+### Transport Options
+
+- **StdIO Transport** (default) - Standard input/output communication for desktop AI tools like GitHub Copilot and Claude Desktop
+- **HTTP Transport** - Web-based API for cloud and web-based AI integrations, runs on port 5000 (HTTP) and 5001 (HTTPS) by default
+
+**StdIO Transport** is ideal for:
+
+- Local desktop AI clients (GitHub Copilot, Claude Desktop)
+- Direct process communication
+- Simple configuration without network setup
+
+**HTTP Transport** is ideal for:
+
+- Web-based AI applications
+- Cloud deployments
+- Multiple client access
+- REST API integration
 
 ### Sample Tools Included
 

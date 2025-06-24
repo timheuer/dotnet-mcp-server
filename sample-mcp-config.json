@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "mcpserver-template": {
+    "mcpserver-stdio": {
       "command": "dotnet",
       "args": [
         "run", 
@@ -8,6 +8,9 @@
         "path/to/your/McpServerTemplate.csproj"
       ],
       "env": {}
+    },
+    "mcpserver-http": {
+      "url": "http://localhost:5000/mcp"
     }
   }
 }

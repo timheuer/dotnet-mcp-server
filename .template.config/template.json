@@ -2,7 +2,8 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Microsoft",
   "classifications": [ "Console", "AI", "MCP", "Server" ],
-  "identity": "Microsoft.DotNet.MCP.Server",
+  "identity": "Microsoft.MCP.Csharp.10.0",
+  "groupIdentity": "Microsoft.MCP",
   "name": "MCP Server",
   "shortName": "mcpserver",
   "tags": {
@@ -30,6 +31,19 @@
       "defaultValue": "net9.0",
       "replaces": "net9.0"
     },
+    "EnableHttpTransport": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Enable HTTP Transport",
+      "defaultValue": "false"
+    },
+    "EnableOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Enable OpenTelemetry for tracing and metrics",
+      "defaultValue": "false",
+      "isEnabled": "(EnableHttpTransport == \"True\")"
+    },
     "SkipRestore": {
       "type": "parameter",
       "datatype": "bool",
@@ -40,6 +54,7 @@
   "primaryOutputs": [
     { "path": "McpServerTemplate.csproj" }
   ],
+  "defaultName": "McpServer",
   "postActions": [
     {
       "condition": "(!SkipRestore)",
