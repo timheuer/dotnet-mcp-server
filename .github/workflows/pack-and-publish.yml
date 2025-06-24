@@ -15,7 +15,7 @@ on:
 
 env:
   DOTNET_VERSION: "9.0.x"
-  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/artifacts
   NUGET_SOURCE_URL: "https://api.nuget.org/v3/index.json"
 
 jobs:
@@ -33,11 +33,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v1
-        with:
-          nuget-version: "latest"
 
       - name: Determine version
         id: version
@@ -65,24 +60,32 @@ jobs:
           echo "prerelease=$PRERELEASE" >> $GITHUB_OUTPUT
           echo "Publishing version: $VERSION (prerelease: $PRERELEASE)"
 
-      - name: Update version in nuspec
-        run: |
-          sed -i "s/<version>.*<\/version>/<version>${{ steps.version.outputs.version }}<\/version>/" Microsoft.DotNet.MCP.Server.Template.nuspec
-          echo "Updated nuspec version to ${{ steps.version.outputs.version }}"
-
-      - name: Create output directory
-        run: mkdir -p ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
-
       - name: Pack NuGet package
         run: |
-          nuget pack Microsoft.DotNet.MCP.Server.Template.nuspec \
-            -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }} \
-            -Properties "version=${{ steps.version.outputs.version }}"
+          dotnet pack Microsoft.McpServer.Template.csproj \
+            -p:PackageVersion=${{ steps.version.outputs.version }} \
+            --configuration Release
 
       - name: List package contents
         run: |
           echo "Created packages:"
           ls -la ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+
+      - name: Test template installation
+        run: |
+          # Install the template locally to test it
+          dotnet new install ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/Microsoft.McpServer.Template.${{ steps.version.outputs.version }}.nupkg
+
+          # Create a test project
+          mkdir -p /tmp/template-test
+          cd /tmp/template-test
+          dotnet new mcpserver -n TestMcpServer
+
+          # Build the test project
+          cd TestMcpServer
+          dotnet build
+
+          echo "✅ Template installation and usage test passed!"
 
       - name: Publish to NuGet
         run: |
@@ -113,7 +116,7 @@ jobs:
 
             ### Installation
             ```bash
-            dotnet new install Microsoft.DotNet.MCP.Server.Template::${{ steps.version.outputs.version }}
+            dotnet new install Microsoft.McpServer.Template::${{ steps.version.outputs.version }}
             ```
 
             ### Usage
@@ -125,19 +128,3 @@ jobs:
             See [CHANGELOG.md](CHANGELOG.md) for details.
           draft: false
           prerelease: ${{ steps.version.outputs.prerelease == 'true' }}
-
-      - name: Test template installation
-        run: |
-          # Install the template locally to test it
-          dotnet new install ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/Microsoft.DotNet.MCP.Server.Template.${{ steps.version.outputs.version }}.nupkg
-
-          # Create a test project
-          mkdir -p /tmp/template-test
-          cd /tmp/template-test
-          dotnet new mcpserver -n TestMcpServer
-
-          # Build the test project
-          cd TestMcpServer
-          dotnet build
-
-          echo "✅ Template installation and usage test passed!"

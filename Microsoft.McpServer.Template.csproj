@@ -1,0 +1,78 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Package Identity -->
+    <PackageId>Microsoft.McpServer.Template</PackageId>
+    <PackageVersion>1.0.0-preview</PackageVersion>
+    <Title>MCP Server Template for .NET</Title>
+    <Authors>Microsoft</Authors>
+    <Owners>Microsoft</Owners>
+    
+    <!-- Package Description -->
+    <Description>A .NET project template for creating Model Context Protocol (MCP) servers using C# and the ModelContextProtocol package. This template provides a starting point for building MCP servers that can expose tools and capabilities to AI clients like GitHub Copilot.</Description>
+    <Summary>Project template for creating Model Context Protocol servers in C#</Summary>
+    <PackageReleaseNotes>Initial release of the MCP Server template for .NET</PackageReleaseNotes>
+    
+    <!-- Legal and Repository Info -->
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/modelcontextprotocol/csharp-sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/modelcontextprotocol/csharp-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    
+    <!-- Package Metadata -->
+    <PackageTags>dotnet-new template mcp server ai model-context-protocol copilot csharp netcore</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <Language>en-US</Language>
+    
+    <!-- Template-specific -->
+    <PackageType>Template</PackageType>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>NU5128</NoWarn>
+    
+    <!-- Build settings -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    
+    <!-- Output settings -->
+    <PackageOutputPath>artifacts</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Package-specific files (not copied to template) -->
+    <Content Include="README.md" PackagePath="README.md" />
+    <Content Include="icon.png" PackagePath="icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Exclude all source files from compilation -->
+    <Compile Remove="src\**\*.cs" />
+    <EmbeddedResource Remove="src\**\*" />
+    <None Remove="src\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Template configuration -->
+    <Content Include="src\.template.config\**" PackagePath="content\.template.config\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Source files -->
+    <Content Include="src\Program.cs" PackagePath="content\" />
+    <Content Include="src\McpServerTemplate.csproj" PackagePath="content\" />
+    <Content Include="src\Tools\**\*.cs" PackagePath="content\Tools\" />
+    <Content Include="src\Prompts\**\*.cs" PackagePath="content\Prompts\" />
+    <Content Include="src\Directory.Packages.props" PackagePath="content\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Documentation and configuration -->
+    <Content Include="src\sample-mcp-config.json" PackagePath="content\" />
+    <None Include="src\.gitignore" Pack="true" PackagePath="content\.gitignore" />
+  </ItemGroup>
+
+</Project>

@@ -22,21 +22,16 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v1
-        with:
-          nuget-version: "latest"
-
       - name: Pack template (test only)
         run: |
-          nuget pack Microsoft.DotNet.MCP.Server.Template.nuspec \
-            -OutputDirectory ./test-output \
-            -Properties "version=1.0.0-ci-${{ github.run_number }}"
+          dotnet pack Microsoft.McpServer.Template.csproj \
+            -p:PackageVersion=1.0.0-ci-${{ github.run_number }} \
+            --configuration Release
 
       - name: Test template installation and usage
         run: |
           # Install the template locally
-          dotnet new install ./test-output/Microsoft.DotNet.MCP.Server.Template.1.0.0-ci-${{ github.run_number }}.nupkg
+          dotnet new install ./artifacts/Microsoft.McpServer.Template.1.0.0-ci-${{ github.run_number }}.nupkg
 
           # Create a test project
           mkdir -p /tmp/template-test
@@ -54,5 +49,5 @@ jobs:
         if: always()
         with:
           name: test-template-package
-          path: ./test-output/*.nupkg
+          path: ./artifacts/*.nupkg
           retention-days: 7
