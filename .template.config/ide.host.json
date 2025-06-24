@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/ide.host",
+  "symbolInfo": [
+    {
+      "id": "EnableHttpTransport",
+      "name": {
+        "text": "Enable HTTP Transport"
+      },
+      "description": {
+        "text": "Enable HTTP Transport"
+      }
+    },
+    {
+      "id": "EnableOpenTelemetry",
+      "name": {
+        "text": "Enable OpenTelemetry"
+      },
+      "description": {
+        "text": "Enable OpenTelemetry for tracing and metrics"
+      }
+    }
+  ]
+}
