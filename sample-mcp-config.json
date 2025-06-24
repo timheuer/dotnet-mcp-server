@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "mcpserver-template": {
+      "command": "dotnet",
+      "args": [
+        "run", 
+        "--project", 
+        "path/to/your/McpServerTemplate.csproj"
+      ],
+      "env": {}
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.DotNet.MCP.Server.Template</id>
+    <version>1.0.0-preview</version>
+    <title>MCP Server Template for .NET</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <description>A .NET project template for creating Model Context Protocol (MCP) servers using C# and the ModelContextProtocol package. This template provides a starting point for building MCP servers that can expose tools and capabilities to AI clients like GitHub Copilot.</description>
+    <summary>Project template for creating Model Context Protocol servers in C#</summary>
+    <releaseNotes>
+      Initial release of the MCP Server template for .NET:
+      - Complete MCP server setup with Microsoft.Extensions.Hosting
+      - Sample tools demonstrating basic and advanced MCP capabilities
+      - Prompt templates for AI interactions
+      - Dependency injection support
+      - Async operation examples
+      - Comprehensive documentation and examples
+    </releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>dotnet-new template mcp server ai model-context-protocol copilot csharp netcore</tags>
+    <license type="expression">MIT</license>
+    <icon>icon.png</icon>
+    <projectUrl>https://github.com/modelcontextprotocol/csharp-sdk</projectUrl>
+    <repository type="git" url="https://github.com/modelcontextprotocol/csharp-sdk" />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <language>en-US</language>
+  </metadata>
+  <files>
+    <!-- Package-specific files (not copied to template) -->
+    <file src="README.md" target="README.md" />
+    <file src="icon.png" target="icon.png" />
+    
+    <!-- Template configuration -->
+    <file src=".template.config\**" target="content\.template.config\" />
+    
+    <!-- Source files -->
+    <file src="Program.cs" target="content\" />
+    <file src="McpServerTemplate.csproj" target="content\" />
+    <file src="Tools\**\*.cs" target="content\Tools\" />
+    <file src="Prompts\**\*.cs" target="content\Prompts\" />
+    
+    <!-- Documentation and configuration -->
+    <file src="sample-mcp-config.json" target="content\" />
+    <file src=".gitignore" target="content\" />
+  </files>
+</package>

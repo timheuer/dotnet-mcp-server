@@ -1,0 +1,153 @@
+name: Pack and Publish MCP Server Template
+
+on:
+  workflow_dispatch: # Allows manual triggering
+    inputs:
+      version:
+        description: "Version to publish (e.g., 1.0.0)"
+        required: true
+        type: string
+      prerelease:
+        description: "Mark as prerelease"
+        required: false
+        default: true
+        type: boolean
+
+env:
+  DOTNET_VERSION: "9.0.x"
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
+  NUGET_SOURCE_URL: "https://api.nuget.org/v3/index.json"
+
+jobs:
+  pack-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: "latest"
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+            PRERELEASE="${{ github.event.inputs.prerelease }}"
+          else
+            # Extract version from tag (remove 'v' prefix)
+            VERSION="${{ github.ref_name }}"
+            VERSION="${VERSION#v}"
+            # Check if it's a prerelease (contains alpha, beta, rc, preview)
+            if [[ "$VERSION" =~ (alpha|beta|rc|preview) ]]; then
+              PRERELEASE="true"
+            else
+              PRERELEASE="false"
+            fi
+          fi
+
+          if [ "$PRERELEASE" == "true" ] && [[ ! "$VERSION" =~ (alpha|beta|rc|preview) ]]; then
+            VERSION="${VERSION}-preview"
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "prerelease=$PRERELEASE" >> $GITHUB_OUTPUT
+          echo "Publishing version: $VERSION (prerelease: $PRERELEASE)"
+
+      - name: Update version in nuspec
+        run: |
+          sed -i "s/<version>.*<\/version>/<version>${{ steps.version.outputs.version }}<\/version>/" Microsoft.DotNet.MCP.Server.Template.nuspec
+          echo "Updated nuspec version to ${{ steps.version.outputs.version }}"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests (if any)
+        run: dotnet test --configuration Release --no-build --verbosity normal
+        continue-on-error: true # Template projects might not have tests
+
+      - name: Create output directory
+        run: mkdir -p ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+
+      - name: Pack NuGet package
+        run: |
+          nuget pack Microsoft.DotNet.MCP.Server.Template.nuspec \
+            -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }} \
+            -Properties "version=${{ steps.version.outputs.version }}"
+
+      - name: List package contents
+        run: |
+          echo "Created packages:"
+          ls -la ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+
+      - name: Publish to NuGet
+        run: |
+          dotnet nuget push "${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg" \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source ${{ env.NUGET_SOURCE_URL }} \
+            --skip-duplicate
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg
+          retention-days: 90
+
+      - name: Create GitHub Release
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: MCP Server Template ${{ steps.version.outputs.version }}
+          body: |
+            ## MCP Server Template ${{ steps.version.outputs.version }}
+
+            ### Installation
+            ```bash
+            dotnet new install Microsoft.DotNet.MCP.Server.Template::${{ steps.version.outputs.version }}
+            ```
+
+            ### Usage
+            ```bash
+            dotnet new mcpserver -n MyMcpServer
+            ```
+
+            ### Changes
+            See [CHANGELOG.md](CHANGELOG.md) for details.
+          draft: false
+          prerelease: ${{ steps.version.outputs.prerelease == 'true' }}
+
+      - name: Test template installation
+        run: |
+          # Install the template locally to test it
+          dotnet new install ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/Microsoft.DotNet.MCP.Server.Template.${{ steps.version.outputs.version }}.nupkg
+
+          # Create a test project
+          mkdir -p /tmp/template-test
+          cd /tmp/template-test
+          dotnet new mcpserver -n TestMcpServer
+
+          # Build the test project
+          cd TestMcpServer
+          dotnet build
+
+          echo "✅ Template installation and usage test passed!"

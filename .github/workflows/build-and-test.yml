@@ -1,0 +1,64 @@
+name: Build and Test Template
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  DOTNET_VERSION: "9.0.x"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: "latest"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Pack template (test only)
+        run: |
+          nuget pack Microsoft.DotNet.MCP.Server.Template.nuspec \
+            -OutputDirectory ./test-output \
+            -Properties "version=1.0.0-ci-${{ github.run_number }}"
+
+      - name: Test template installation and usage
+        run: |
+          # Install the template locally
+          dotnet new install ./test-output/Microsoft.DotNet.MCP.Server.Template.1.0.0-ci-${{ github.run_number }}.nupkg
+
+          # Create a test project
+          mkdir -p /tmp/template-test
+          cd /tmp/template-test
+          dotnet new mcpserver -n TestMcpServer
+
+          # Build the test project
+          cd TestMcpServer
+          dotnet build --configuration Release
+
+          echo "✅ Template builds and works correctly!"
+
+      - name: Upload test package
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-template-package
+          path: ./test-output/*.nupkg
+          retention-days: 7
