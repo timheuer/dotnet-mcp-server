@@ -13,6 +13,10 @@ on:
         default: true
         type: boolean
 
+permissions:
+  contents: write
+  actions: write
+
 env:
   DOTNET_VERSION: "9.0.x"
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/artifacts
