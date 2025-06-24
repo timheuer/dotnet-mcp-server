@@ -1,18 +1,19 @@
 <Project>    
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.1" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
-        
-        <!-- #if (EnableHttpTransport) -->
-        <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.3.0-preview.1" />
-        <!-- #endif -->
-    
-        <!-- #if (EnableOTel) -->
-        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
-        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
-        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
-        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
-        <!-- #endif -->
+        <PackageVersion Include="ModelContextProtocol" Version="0.3.0-preview.1" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
+        <!--#if (EnableHttpTransport) -->
+        <PackageVersion Include="ModelContextProtocol.AspNetCore" Version="0.3.0-preview.1" />
+        <!--#endif -->
+        <!--#if (EnableOpenTelemetry) -->
+        <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+        <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+        <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+        <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+        <!--#endif -->
     </ItemGroup>
 </Project>
