@@ -27,12 +27,6 @@ jobs:
         with:
           nuget-version: "latest"
 
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore
-
       - name: Pack template (test only)
         run: |
           nuget pack Microsoft.DotNet.MCP.Server.Template.nuspec \

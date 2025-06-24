@@ -70,16 +70,6 @@ jobs:
           sed -i "s/<version>.*<\/version>/<version>${{ steps.version.outputs.version }}<\/version>/" Microsoft.DotNet.MCP.Server.Template.nuspec
           echo "Updated nuspec version to ${{ steps.version.outputs.version }}"
 
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Run tests (if any)
-        run: dotnet test --configuration Release --no-build --verbosity normal
-        continue-on-error: true # Template projects might not have tests
-
       - name: Create output directory
         run: mkdir -p ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 

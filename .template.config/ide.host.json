@@ -7,7 +7,7 @@
         "text": "Enable HTTP Transport"
       },
       "description": {
-        "text": "Enable HTTP Transport"
+        "text": "Enables HTTP Transport for communication with the MCP server."
       }
     },
     {
@@ -16,7 +16,7 @@
         "text": "Enable OpenTelemetry"
       },
       "description": {
-        "text": "Enable OpenTelemetry for tracing and metrics"
+        "text": "Enables OpenTelemetry for tracing and metrics"
       }
     }
   ]

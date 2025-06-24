@@ -2,20 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Microsoft.McpServer.Template</id>
-    <version>0.1.0-preview</version>
+    <version>1.0.0-preview</version>
     <title>MCP Server Template for .NET</title>
     <authors>Microsoft</authors>
     <owners>Microsoft</owners>
     <description>A .NET project template for creating Model Context Protocol (MCP) servers using C# and the ModelContextProtocol package. This template provides a starting point for building MCP servers that can expose tools and capabilities to AI clients like GitHub Copilot.</description>
     <summary>Project template for creating Model Context Protocol servers in C#</summary>
     <releaseNotes>
-      Initial release of the MCP Server template for .NET:
-      - Complete MCP server setup with Microsoft.Extensions.Hosting
-      - Sample tools demonstrating basic and advanced MCP capabilities
-      - Prompt templates for AI interactions
-      - Dependency injection support
-      - Async operation examples
-      - Comprehensive documentation and examples
+      Initial release of the MCP Server template for .NET
     </releaseNotes>
     <copyright>© Microsoft Corporation. All rights reserved.</copyright>
     <tags>dotnet-new template mcp server ai model-context-protocol copilot csharp netcore</tags>
