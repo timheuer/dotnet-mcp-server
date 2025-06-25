@@ -4,7 +4,7 @@
     <!-- Package Identity -->
     <PackageId>Microsoft.McpServer.Template</PackageId>
     <PackageVersion>1.0.0-preview</PackageVersion>
-    <Title>MCP Server Template for .NET</Title>
+    <Title>MCP Server Template (C#)</Title>
     <Authors>Microsoft</Authors>
     <Owners>Microsoft</Owners>
     
