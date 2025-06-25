@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <!-- Package Identity -->
-    <PackageId>Microsoft.McpServer.Template</PackageId>
+    <PackageId>Microsoft.McpServer.Csharp</PackageId>
     <PackageVersion>1.0.0-preview</PackageVersion>
     <Title>MCP Server Template (C#)</Title>
     <Authors>Microsoft</Authors>
     <Owners>Microsoft</Owners>
     
     <!-- Package Description -->
-    <Description>A .NET project template for creating Model Context Protocol (MCP) servers using C# and the ModelContextProtocol package. This template provides a starting point for building MCP servers that can expose tools and capabilities to AI clients like GitHub Copilot.</Description>
+    <Description>A project template for creating Model Context Protocol (MCP) servers using C# and the ModelContextProtocol package. This template provides a starting point for building MCP servers that can expose tools and capabilities to AI clients like GitHub Copilot.</Description>
     <Summary>Project template for creating Model Context Protocol servers in C#</Summary>
-    <PackageReleaseNotes>Initial release of the MCP Server template for .NET</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial release of the MCP Server template for C#</PackageReleaseNotes>
     
     <!-- Legal and Repository Info -->
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
