@@ -53,17 +53,6 @@ public static class SampleTools
     }
 
     /// <summary>
-    /// Gets the current date and time in ISO 8601 format.
-    /// </summary>
-    /// <returns>Current date and time as ISO 8601 string</returns>
-    [McpServerTool(Name = "get_current_datetime")]
-    [Description("Gets the current date and time in ISO 8601 format")]
-    public static string GetCurrentDateTime()
-    {
-        return DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
-    }
-
-    /// <summary>
     /// Generates a random number between the specified minimum and maximum values.
     /// </summary>
     /// <param name="min">Minimum value (inclusive)</param>

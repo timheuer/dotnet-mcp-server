@@ -1,7 +1,5 @@
+#if (!EnableHttpTransport)
 using Microsoft.Extensions.DependencyInjection;
-#if (EnableHttpTransport)
-using Microsoft.AspNetCore.Builder;
-#else
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 #endif
@@ -9,8 +7,8 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
-#endif
 
+#endif
 #if (EnableHttpTransport)
 // Create a web application builder for HTTP transport
 var builder = WebApplication.CreateBuilder(args);

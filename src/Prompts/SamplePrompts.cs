@@ -42,22 +42,4 @@ public static class SamplePrompts
             ChatRole.User,
             $"Please analyze this {language} code and suggest improvements:\n\n```{language.ToLower()}\n{code}\n```");
     }
-
-    /// <summary>
-    /// Creates a prompt to explain a technical concept.
-    /// </summary>
-    /// <param name="concept">The concept to explain</param>
-    /// <param name="audienceLevel">The target audience level</param>
-    /// <returns>A chat message requesting explanation</returns>
-    [McpServerPrompt(Name = "explain_concept")]
-    [Description("Creates a prompt to explain a technical concept")]
-    public static ChatMessage ExplainConcept(
-        [Description("The concept to explain")] string concept,
-        [Description("The target audience level (beginner, intermediate, advanced)")] string audienceLevel = "intermediate")
-    {
-        return new ChatMessage(
-            ChatRole.User,
-            $"Please explain the concept of '{concept}' for a {audienceLevel} level audience. " +
-            "Use clear examples and avoid unnecessary jargon.");
-    }
 }

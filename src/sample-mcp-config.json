@@ -1,16 +1,19 @@
 {
   "mcpServers": {
+    //#if (EnableHttpTransport)
+    "mcpserver-http": {
+      "url": "http://localhost:5000/mcp"
+    },
+    //#endif
     "mcpserver-stdio": {
       "command": "dotnet",
       "args": [
         "run", 
         "--project", 
-        "path/to/your/McpServerTemplate.csproj"
+        "McpServerTemplate.csproj"
       ],
-      "env": {}
-    },
-    "mcpserver-http": {
-      "url": "http://localhost:5000/mcp"
+      "env": {},
+      "// Note": "Update the project path above to match your actual project location if needed"
     }
   }
 }

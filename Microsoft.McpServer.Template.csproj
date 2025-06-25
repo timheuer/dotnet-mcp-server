@@ -57,7 +57,8 @@
 
   <ItemGroup>
     <Content Include="src/**/*" PackagePath="content/" />
-    <None Include="src/.gitignore" Pack="true" PackagePath="content/.gitignore" />
+    <Content Remove="src/**/bin/**" />
+    <Content Remove="src/**/obj/**" />
   </ItemGroup>
 
 </Project>
