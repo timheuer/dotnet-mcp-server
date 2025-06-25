@@ -1,7 +1,7 @@
 # MCP Server Template for .NET
 
-[![NuGet](https://img.shields.io/nuget/v/Microsoft.DotNet.MCP.Server.Template.svg)](https://www.nuget.org/packages/Microsoft.DotNet.MCP.Server.Template/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Microsoft.DotNet.MCP.Server.Template.svg)](https://www.nuget.org/packages/Microsoft.DotNet.MCP.Server.Template/)
+[![NuGet](https://img.shields.io/nuget/v/Microsoft.McpServer.Csharp.svg)](https://www.nuget.org/packages/Microsoft.McpServer.Csharp/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Microsoft.McpServer.Csharp.svg)](https://www.nuget.org/packages/Microsoft.McpServer.Csharp/)
 
 A comprehensive .NET project template for creating **Model Context Protocol (MCP) servers** using C# and the official ModelContextProtocol package.
 
@@ -10,7 +10,7 @@ A comprehensive .NET project template for creating **Model Context Protocol (MCP
 ### Install the Template
 
 ```bash
-dotnet new install Microsoft.DotNet.MCP.Server.Template
+dotnet new install Microsoft.McpServer.Csharp
 ```
 
 ### Create Your MCP Server

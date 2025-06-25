@@ -33,18 +33,15 @@ To install this template locally for development and testing:
 
 To distribute this template via NuGet:
 
-1. **Use the provided NuGet specification**:
-   The template includes a complete `Microsoft.DotNet.MCP.Server.Template.nuspec` file with proper metadata, dependencies, and file mappings.
-
-2. **Pack the template using nuget.exe**:
+1. **Pack the template**:
    Or manually:
    ```bash
-   nuget pack Microsoft.DotNet.MCP.Server.Template.nuspec
+   dotnet pack Microsoft.McpServer.Template.csproj
    ```
 
 3. **Install from the package**:
    ```bash
-   dotnet new install Microsoft.DotNet.MCP.Server.Template.1.0.0.nupkg
+   dotnet new install Microsoft.McpServer.Csharp.1.0.0-preview.nupkg
    ```
 
 ### Option 3: GitHub Repository Template
@@ -139,7 +136,7 @@ dotnet new uninstall .
 Or if installed via NuGet:
 
 ```bash
-dotnet new uninstall Microsoft.DotNet.MCP.Server.Template
+dotnet new uninstall Microsoft.McpServer.Csharp
 ```
 
 ## Best Practices

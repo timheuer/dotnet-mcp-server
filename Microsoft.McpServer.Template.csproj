@@ -56,22 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Template configuration -->
-    <Content Include="src/.template.config/**" PackagePath="content/.template.config/" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- Source files -->
-    <Content Include="src/Program.cs" PackagePath="content/" />
-    <Content Include="src/McpServerTemplate.csproj" PackagePath="content/" />
-    <Content Include="src/Tools/**/*.cs" PackagePath="content/Tools/" />
-    <Content Include="src/Prompts/**/*.cs" PackagePath="content/Prompts/" />
-    <Content Include="src/Directory.Packages.props" PackagePath="content/" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- Documentation and configuration -->
-    <Content Include="src/sample-mcp-config.json" PackagePath="content/" />
+    <Content Include="src/**/*" PackagePath="content/" />
     <None Include="src/.gitignore" Pack="true" PackagePath="content/.gitignore" />
   </ItemGroup>
 
