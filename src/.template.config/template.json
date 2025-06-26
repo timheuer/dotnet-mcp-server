@@ -54,6 +54,18 @@
       "defaultValue": "false"
     }
   },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(EnableHttpTransport == \"False\")",
+          "exclude": [
+            "Properties/**"
+          ]
+        }
+      ]
+    }
+  ],
   "primaryOutputs": [
     { "path": "McpServerTemplate.csproj" }
   ],

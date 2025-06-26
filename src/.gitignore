@@ -41,7 +41,6 @@ dlldata.c
 # .NET Core
 project.lock.json
 artifacts/
-**/Properties/launchSettings.json
 
 # StyleCop
 StyleCopReport.xml
