@@ -11,10 +11,10 @@ using OpenTelemetry.Trace;
 
 #endif
 #if (EnableHttpTransport)
-// Create a web application builder for HTTP transport
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure services and MCP server with HTTP transport
+// Register the MCP server, configure it to use HTTP transport,
+// and add the tools/prompts from the current assembly
 builder.Services.AddMcpServer()
     .WithHttpTransport()
     .WithToolsFromAssembly()
@@ -32,16 +32,10 @@ builder.Services.AddOpenTelemetry()
     .UseOtlpExporter();
 #endif
 
-// Build the web application
 var app = builder.Build();
-
-// Map the MCP endpoint
 app.MapMcp();
-
-// Run the web application (defaults to port 5000 for HTTP, 5001 for HTTPS)
 await app.RunAsync();
 #else
-// Create a host builder for dependency injection, logging, and configuration
 var builder = Host.CreateDefaultBuilder(args);
 
 // Configure logging for better integration with MCP clients
@@ -52,18 +46,16 @@ builder.ConfigureLogging(logging =>
     logging.SetMinimumLevel(LogLevel.Information);
 });
 
-// Configure services and MCP server
 builder.ConfigureServices((context, services) =>
 {
     // Register the MCP server, configure it to use stdio transport,
-    // and scan the assembly for tool and prompt definitions
+    // and add the tools/prompts from the current assembly
     services.AddMcpServer()
         .WithStdioServerTransport()
         .WithToolsFromAssembly()
         .WithPromptsFromAssembly();
 });
 
-// Build and run the host, which starts the MCP server
 var host = builder.Build();
 await host.RunAsync();
 #endif
