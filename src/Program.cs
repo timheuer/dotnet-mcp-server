@@ -36,26 +36,20 @@ var app = builder.Build();
 app.MapMcp();
 await app.RunAsync();
 #else
-var builder = Host.CreateDefaultBuilder(args);
+var builder = Host.CreateApplicationBuilder(args);
+
+// Register the MCP server, configure it to use stdio transport,
+// and add the tools/prompts from the current assembly
+builder.Services.AddMcpServer()
+    .WithStdioServerTransport()
+    .WithToolsFromAssembly()
+    .WithPromptsFromAssembly();
 
 // Configure logging for better integration with MCP clients
-builder.ConfigureLogging(logging =>
+builder.Logging.AddConsole(options =>
 {
-    logging.ClearProviders();
-    logging.AddConsole();
-    logging.SetMinimumLevel(LogLevel.Information);
+    options.LogToStandardErrorThreshold = LogLevel.Trace;
 });
 
-builder.ConfigureServices((context, services) =>
-{
-    // Register the MCP server, configure it to use stdio transport,
-    // and add the tools/prompts from the current assembly
-    services.AddMcpServer()
-        .WithStdioServerTransport()
-        .WithToolsFromAssembly()
-        .WithPromptsFromAssembly();
-});
-
-var host = builder.Build();
-await host.RunAsync();
+await builder.Build().RunAsync();
 #endif
