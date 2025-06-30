@@ -9,7 +9,7 @@ namespace McpServerTemplate.Prompts;
 /// These prompts can be used by MCP clients to generate context-aware messages.
 /// </summary>
 [McpServerPromptType]
-public static class SamplePrompts
+public class SamplePrompts
 {
     /// <summary>
     /// Creates a prompt to summarize the provided content.
@@ -18,7 +18,7 @@ public static class SamplePrompts
     /// <returns>A chat message requesting summarization</returns>
     [McpServerPrompt(Name = "summarize_content")]
     [Description("Creates a prompt to summarize the provided content")]
-    public static ChatMessage Summarize(
+    public ChatMessage Summarize(
         [Description("The content to summarize")] string content)
     {
         return new ChatMessage(
@@ -34,7 +34,7 @@ public static class SamplePrompts
     /// <returns>A chat message requesting code analysis</returns>
     [McpServerPrompt(Name = "analyze_code")]
     [Description("Creates a prompt to analyze code and suggest improvements")]
-    public static ChatMessage AnalyzeCode(
+    public ChatMessage AnalyzeCode(
         [Description("The code to analyze")] string code,
         [Description("The programming language")] string language = "C#")
     {

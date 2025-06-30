@@ -1,3 +1,5 @@
+using McpServerTemplate.Prompts;
+using McpServerTemplate.Tools;
 #if (!EnableHttpTransport)
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,17 +10,17 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
-
 #endif
 #if (EnableHttpTransport)
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Register the MCP server, configure it to use HTTP transport,
 // and add the tools/prompts from the current assembly
 builder.Services.AddMcpServer()
     .WithHttpTransport()
-    .WithToolsFromAssembly()
-    .WithPromptsFromAssembly();
+    .WithTools<SampleTools>()
+    .WithPrompts<SamplePrompts>();
 
 #if (EnableOpenTelemetry)
 builder.Services.AddOpenTelemetry()
@@ -42,8 +44,8 @@ var builder = Host.CreateApplicationBuilder(args);
 // and add the tools/prompts from the current assembly
 builder.Services.AddMcpServer()
     .WithStdioServerTransport()
-    .WithToolsFromAssembly()
-    .WithPromptsFromAssembly();
+    .WithTools<SampleTools>()
+    .WithPrompts<SamplePrompts>();
 
 // Configure logging for better integration with MCP clients
 builder.Logging.AddConsole(options =>

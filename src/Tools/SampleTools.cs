@@ -8,7 +8,7 @@ namespace McpServerTemplate.Tools;
 /// These tools can be invoked by MCP clients to perform various operations.
 /// </summary>
 [McpServerToolType]
-public static class SampleTools
+public class SampleTools
 {
     /// <summary>
     /// Echoes the provided text back to the client.
@@ -17,7 +17,7 @@ public static class SampleTools
     /// <returns>The echoed text</returns>
     [McpServerTool(Name = "echo")]
     [Description("Echoes the provided text back to the client")]
-    public static string Echo(
+    public string Echo(
         [Description("The text to echo")] string text)
     {
         return $"Echo: {text}";
@@ -30,7 +30,7 @@ public static class SampleTools
     /// <returns>The reversed text</returns>
     [McpServerTool(Name = "reverse_echo")]
     [Description("Reverses the provided text and echoes it back to the client")]
-    public static string ReverseEcho(
+    public string ReverseEcho(
         [Description("The text to reverse and echo")] string text)
     {
         var reversed = new string(text.Reverse().ToArray());
@@ -45,7 +45,7 @@ public static class SampleTools
     /// <returns>The sum of the two numbers</returns>
     [McpServerTool(Name = "add_numbers")]
     [Description("Adds two numbers together and returns the sum")]
-    public static int Add(
+    public int Add(
         [Description("First number")] int a,
         [Description("Second number")] int b)
     {
@@ -60,7 +60,7 @@ public static class SampleTools
     /// <returns>A random number between min and max</returns>
     [McpServerTool(Name = "generate_random_number")]
     [Description("Generates a random number between the specified minimum and maximum values")]
-    public static int GenerateRandomNumber(
+    public int GenerateRandomNumber(
         [Description("Minimum value (inclusive)")] int min = 0,
         [Description("Maximum value (exclusive)")] int max = 100)
     {
