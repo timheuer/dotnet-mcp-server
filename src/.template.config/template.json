@@ -5,7 +5,7 @@
   "identity": "Microsoft.MCP.Csharp.10.0",
   "groupIdentity": "Microsoft.MCP",
   "name": "MCP Server",
-  "shortName": "mcpserver",
+  "shortName": "mcp-server",
   "tags": {
     "language": "C#",
     "type": "project"
