@@ -21,6 +21,7 @@ env:
   DOTNET_VERSION: "9.0.x"
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/artifacts
   NUGET_SOURCE_URL: "https://api.nuget.org/v3/index.json"
+  SHORT_NAME: "mcp-server"
 
 jobs:
   pack-and-publish:
@@ -83,7 +84,7 @@ jobs:
           # Create a test project
           mkdir -p /tmp/template-test
           cd /tmp/template-test
-          dotnet new mcpserver -n TestMcpServer
+          dotnet new ${{ env.SHORT_NAME }} -n TestMcpServer
 
           # Build the test project
           cd TestMcpServer
@@ -125,7 +126,7 @@ jobs:
 
             ### Usage
             ```bash
-            dotnet new mcpserver -n MyMcpServer
+            dotnet new ${{ env.SHORT_NAME }} -n MyMcpServer
             ```
 
             ### Changes
