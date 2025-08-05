@@ -2,12 +2,12 @@
   "$schema": "https://json.schemastore.org/ide.host",
   "symbolInfo": [
     {
-      "id": "EnableHttpTransport",
+      "id": "TransportMethod",
       "name": {
-        "text": "Enable HTTP Transport"
+        "text": "Transport Method"
       },
       "description": {
-        "text": "Enables HTTP Transport for communication with the MCP server."
+        "text": "The transport method used for communication with the MCP server."
       }
     },
     {
