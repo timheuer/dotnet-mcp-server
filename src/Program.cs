@@ -14,14 +14,21 @@ using OpenTelemetry.Trace;
 #if (EnableHttpTransport)
 
 var builder = WebApplication.CreateBuilder(args);
+#else
+var builder = Host.CreateApplicationBuilder(args);
+#endif
 
-// Register the MCP server, configure it to use HTTP transport,
-// and add the tools/prompts from the current assembly
+// Register the MCP server and add the tools/prompts from the current assembly
 builder.Services.AddMcpServer()
+#if (EnableHttpTransport)
     .WithHttpTransport()
+#else
+    .WithStdioServerTransport()
+#endif
     .WithTools<SampleTools>()
     .WithPrompts<SamplePrompts>();
 
+#if (EnableHttpTransport)
 #if (EnableOpenTelemetry)
 builder.Services.AddOpenTelemetry()
     .WithTracing(b => b.AddSource("*")
@@ -38,16 +45,7 @@ var app = builder.Build();
 app.MapMcp();
 await app.RunAsync();
 #else
-var builder = Host.CreateApplicationBuilder(args);
-
-// Register the MCP server, configure it to use stdio transport,
-// and add the tools/prompts from the current assembly
-builder.Services.AddMcpServer()
-    .WithStdioServerTransport()
-    .WithTools<SampleTools>()
-    .WithPrompts<SamplePrompts>();
-
-// Configure logging for better integration with MCP clients
+// Configure logging for better integration with MCP clients (stdio)
 builder.Logging.AddConsole(options =>
 {
     options.LogToStandardErrorThreshold = LogLevel.Trace;
