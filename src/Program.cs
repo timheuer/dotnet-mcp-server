@@ -20,7 +20,7 @@ var builder = Host.CreateApplicationBuilder(args);
 
 // Register the MCP server and add the tools/prompts from the current assembly
 builder.Services.AddMcpServer()
-#if (EnableHttpTransport)
+#if (TransportMethod == "streamable-http")
     .WithHttpTransport()
 #else
     .WithStdioServerTransport()
@@ -28,7 +28,7 @@ builder.Services.AddMcpServer()
     .WithTools<SampleTools>()
     .WithPrompts<SamplePrompts>();
 
-#if (EnableHttpTransport)
+#if (TransportMethod == "streamable-http")
 #if (EnableOpenTelemetry)
 builder.Services.AddOpenTelemetry()
     .WithTracing(b => b.AddSource("*")
