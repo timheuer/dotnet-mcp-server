@@ -12,7 +12,6 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 #endif
 #if (TransportMethod == "streamable-http")
-// Create a web application builder for HTTP transport
 var builder = WebApplication.CreateBuilder(args);
 #else
 var builder = Host.CreateApplicationBuilder(args);
