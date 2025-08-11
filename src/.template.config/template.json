@@ -34,18 +34,31 @@
       "defaultValue": "net9.0",
       "replaces": "net9.0"
     },
-    "EnableHttpTransport": {
+    "TransportMethod": {
       "type": "parameter",
-      "datatype": "bool",
-      "description": "Enable HTTP Transport",
-      "defaultValue": "false"
+      "datatype": "choice",
+      "description": "The transport method to use for the MCP server.",
+      "displayName": "Transport Method",
+      "choices": [
+        {
+          "choice": "streamable-http",
+          "description": "Streamable HTTP",
+          "displayName": "Streamable HTTP (streamable-http)"
+        },
+        {
+          "choice": "stdio",
+          "description": "Standard Input/Output STDIO",
+          "displayName": "Standard I/O (stdio)"
+        }
+      ],
+      "defaultValue": "stdio"
     },
     "EnableOpenTelemetry": {
       "type": "parameter",
       "datatype": "bool",
       "description": "Enable OpenTelemetry for tracing and metrics",
       "defaultValue": "false",
-      "isEnabled": "(EnableHttpTransport == \"True\")"
+      "isEnabled": "(TransportMethod == \"streamable-http\")"
     },
     "SkipRestore": {
       "type": "parameter",

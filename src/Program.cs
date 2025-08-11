@@ -1,6 +1,6 @@
 using McpServerTemplate.Prompts;
 using McpServerTemplate.Tools;
-#if (!EnableHttpTransport)
+#if (TransportMethod == "stdio")
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -11,8 +11,8 @@ using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 #endif
-#if (EnableHttpTransport)
-
+#if (TransportMethod == "streamable-http")
+// Create a web application builder for HTTP transport
 var builder = WebApplication.CreateBuilder(args);
 #else
 var builder = Host.CreateApplicationBuilder(args);

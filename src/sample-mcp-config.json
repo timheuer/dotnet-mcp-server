@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    //#if (EnableHttpTransport)
+    //#if (TransportMethod == "streamable-http")
     "mcpserver-http": {
       "url": "http://localhost:5000/mcp"
     },
