@@ -29,10 +29,14 @@
         {
           "choice": "net9.0",
           "description": "Target .NET 9.0"
+        },
+        {
+          "choice": "net10.0",
+          "description": "Target .NET 10.0"
         }
       ],
-      "defaultValue": "net9.0",
-      "replaces": "net9.0"
+      "defaultValue": "net10.0",
+      "replaces": "net10.0"
     },
     "TransportMethod": {
       "type": "parameter",
@@ -42,13 +46,13 @@
       "choices": [
         {
           "choice": "streamable-http",
-          "description": "Streamable HTTP",
-          "displayName": "Streamable HTTP (streamable-http)"
+          "description": "Streamable HTTP transport",
+          "displayName": "Remote (streamable-http)"
         },
         {
           "choice": "stdio",
-          "description": "Standard Input/Output STDIO",
-          "displayName": "Standard I/O (stdio)"
+          "description": "Standard Input/Output (stdio) transport",
+          "displayName": "Local (stdio)"
         }
       ],
       "defaultValue": "stdio"
