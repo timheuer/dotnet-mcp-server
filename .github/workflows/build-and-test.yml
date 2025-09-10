@@ -11,7 +11,7 @@ permissions:
   actions: write
 
 env:
-  DOTNET_VERSION: "9.0.x"
+  DOTNET_VERSION: "10.0.x"
   SHORT_NAME: "mcp-server"
 
 jobs:
@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-quality: preview
 
       - name: Pack template (test only)
         run: |
