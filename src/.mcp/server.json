@@ -1,0 +1,26 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/draft/2025-07-09/server.json",
+  "description": "<your description here>",
+  "name": "io.github.<your GitHub username here>/<your repo name>",
+  "version": "0.1.0-beta",
+  "packages": [
+    {
+      "registry_type": "nuget",
+      "identifier": "McpServerTemplate",
+      "version": "0.1.0-beta",
+      "transport": {
+        //#if (TransportMethod == "streamable-http")
+        "type": "streamable-http"
+        //#else 
+        "type": "stdio"
+        //#endif
+      },
+      "package_arguments": [],
+      "environment_variables": []
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/timheuer/sampledotnetmcpserver",
+    "source": "github"
+  }
+}

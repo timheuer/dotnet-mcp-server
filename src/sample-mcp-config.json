@@ -1,11 +1,11 @@
 {
   "mcpServers": {
     //#if (TransportMethod == "streamable-http")
-    "mcpserver-http": {
+    "McpServerTemplate-http": {
       "url": "http://localhost:5000/mcp"
-    },
-    //#endif
-    "mcpserver-stdio": {
+    }
+    //#else
+    "McpServerTemplate-stdio": {
       "command": "dotnet",
       "args": [
         "run", 
@@ -15,5 +15,6 @@
       "env": {},
       "// Note": "Update the project path above to match your actual project location if needed"
     }
+    //#endif
   }
 }
