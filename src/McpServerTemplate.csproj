@@ -8,6 +8,18 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!--#if (TransportMethod == "stdio") -->
+    <!-- Set up the NuGet package to be an MCP server -->
+    <PackAsTool>true</PackAsTool>
+    <PackageType>McpServer</PackageType>
+
+    <!-- Set recommended package metadata -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageId>McpServerTemplate</PackageId>
+    <PackageVersion>0.1.0-beta</PackageVersion>
+    <PackageTags>AI; MCP; server; stdio</PackageTags>
+    <Description>An MCP server using the MCP C# SDK.</Description>
+    <!--#endif -->
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +41,9 @@
   <!-- Include additional files for browsing the MCP server. -->
   <ItemGroup>
     <None Include=".mcp\server.json" Pack="true" PackagePath="/.mcp/" />
+    <!--#if (TransportMethod == "stdio") -->
     <None Include="README.md" Pack="true" PackagePath="/" />
+    <!--#endif -->
   </ItemGroup>
 
 </Project>
