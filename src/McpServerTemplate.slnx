@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="McpServerTemplate.AppHost\McpServerTemplate.AppHost.csproj" />
+  <Project Path="McpServerTemplate\McpServerTemplate.csproj" />
+</Solution>

@@ -10,7 +10,7 @@
       "args": [
         "run", 
         "--project", 
-        "McpServerTemplate.csproj"
+        "McpServerTemplate/McpServerTemplate.csproj"
       ],
       "env": {},
       "// Note": "Update the project path above to match your actual project location if needed"

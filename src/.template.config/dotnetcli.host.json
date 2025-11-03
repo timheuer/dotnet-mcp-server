@@ -12,6 +12,10 @@
     "EnableOpenTelemetry": {
       "longName": "enable-opentelemetry",
       "shortName": "enable-opentelemetry"
+    },
+    "EnableAspire": {
+      "longName": "enable-aspire",
+      "shortName": "enable-aspire"
     }
   }
 }

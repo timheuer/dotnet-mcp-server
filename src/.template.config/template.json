@@ -64,6 +64,13 @@
       "defaultValue": "false",
       "isEnabled": "(TransportMethod == \"streamable-http\")"
     },
+    "EnableAspire": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Enable Aspire integration",
+      "defaultValue": "true",
+      "isEnabled": "(TransportMethod == \"streamable-http\")"
+    },
     "SkipRestore": {
       "type": "parameter",
       "datatype": "bool",
@@ -75,16 +82,27 @@
     {
       "modifiers": [
         {
-          "condition": "(EnableHttpTransport == \"False\")",
+          "condition": "(TransportMethod == \"stdio\")",
           "exclude": [
-            "Properties/**"
+            "McpServerTemplate/Properties/**"
+          ]
+        },
+        {
+          "condition": "(EnableAspire == false)",
+          "exclude": [
+            "AspireAppHost/**",
+            "McpServerTemplate.AppHost/**",
+            "McpServerTemplate.slnx"
           ]
         }
       ]
     }
   ],
   "primaryOutputs": [
-    { "path": "McpServerTemplate.csproj" }
+    { "path": "McpServerTemplate.AppHost/McpServerTemplate.AppHost.csproj" },
+    { "path": "Directory.Packages.props" },
+    { "path": "McpServerTemplate/McpServerTemplate.csproj" },
+    { "path": "McpServerTemplate.slnx" }
   ],
   "defaultName": "McpServer",
   "postActions": [
@@ -96,6 +114,16 @@
       ],
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
       "continueOnError": true
+    },
+    {
+      "id": "set-startup-project",
+      "description": "Sets the startup project in the solution",
+      "manualInstructions": [],
+      "actionId": "5BECCC32-4D5A-4476-A0F9-BD2E81AF0689",
+      "condition": "(hostIdentifier == \"vs\")",
+      "args": {
+        "projects": "0"
+      }
     }
   ]
 }

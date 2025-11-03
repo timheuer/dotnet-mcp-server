@@ -41,7 +41,7 @@ builder.Services.AddOpenTelemetry()
 #endif
 
 var app = builder.Build();
-app.MapMcp();
+app.MapMcp("/mcp");
 await app.RunAsync();
 #else
 // Configure logging for better integration with MCP clients (stdio)

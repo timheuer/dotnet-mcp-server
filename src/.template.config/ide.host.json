@@ -18,6 +18,15 @@
       "description": {
         "text": "Enables OpenTelemetry for tracing and metrics"
       }
+    },
+    {
+      "id": "EnableAspire",
+      "name": {
+        "text": "Enable Aspire"
+      },
+      "description": {
+        "text": "Enables Aspire integration"
+      }
     }
   ]
 }
