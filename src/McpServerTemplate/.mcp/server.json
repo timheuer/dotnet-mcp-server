@@ -20,7 +20,7 @@
     }
   ],
   "repository": {
-    "url": "https://github.com/timheuer/sampledotnetmcpserver",
+    "url": "<your repo url>",
     "source": "github"
   }
 }

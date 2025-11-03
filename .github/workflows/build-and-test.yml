@@ -45,7 +45,7 @@ jobs:
           dotnet new ${{ env.SHORT_NAME }} -n TestMcpServer
 
           # Build the test project
-          cd TestMcpServer
+          cd TestMcpServer/TestMcpServer
           dotnet build --configuration Release
 
           echo "✅ Template builds and works correctly!"
