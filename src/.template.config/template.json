@@ -84,13 +84,14 @@
         {
           "condition": "(TransportMethod == \"stdio\")",
           "exclude": [
-            "McpServerTemplate/Properties/**"
+            "McpServerTemplate/Properties/**",
+            "McpServerTemplate.AppHost/**",
+            "McpServerTemplate.slnx"
           ]
         },
         {
-          "condition": "(EnableAspire == false)",
+          "condition": "(EnableAspire == false) && (TransportMethod == \"streamable-http\")",
           "exclude": [
-            "AspireAppHost/**",
             "McpServerTemplate.AppHost/**",
             "McpServerTemplate.slnx"
           ]
@@ -98,11 +99,11 @@
       ]
     }
   ],
-  "primaryOutputs": [
-    { "path": "McpServerTemplate.AppHost/McpServerTemplate.AppHost.csproj", "condition": "(EnableAspire == true)" },
+    "primaryOutputs": [
+    { "path": "McpServerTemplate.AppHost/McpServerTemplate.AppHost.csproj", "condition": "(EnableAspire == true) && (TransportMethod == \"streamable-http\")" },
     { "path": "Directory.Packages.props" },
     { "path": "McpServerTemplate/McpServerTemplate.csproj" },
-    { "path": "McpServerTemplate.slnx", "condition": "(EnableAspire == true)" }
+    { "path": "McpServerTemplate.slnx", "condition": "(EnableAspire == true) && (TransportMethod == \"streamable-http\")" }
   ],
   "defaultName": "McpServer",
   "postActions": [

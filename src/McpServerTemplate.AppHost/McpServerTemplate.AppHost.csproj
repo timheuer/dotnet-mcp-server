@@ -7,7 +7,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>AspireAppHost</RootNamespace>
+    <RootNamespace>McpServerTemplate.AppHost</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
