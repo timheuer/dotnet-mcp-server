@@ -99,10 +99,10 @@
     }
   ],
   "primaryOutputs": [
-    { "path": "McpServerTemplate.AppHost/McpServerTemplate.AppHost.csproj" },
+    { "path": "McpServerTemplate.AppHost/McpServerTemplate.AppHost.csproj", "condition": "(EnableAspire == true)" },
     { "path": "Directory.Packages.props" },
     { "path": "McpServerTemplate/McpServerTemplate.csproj" },
-    { "path": "McpServerTemplate.slnx" }
+    { "path": "McpServerTemplate.slnx", "condition": "(EnableAspire == true)" }
   ],
   "defaultName": "McpServer",
   "postActions": [
