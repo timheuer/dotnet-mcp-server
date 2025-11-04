@@ -2,10 +2,11 @@
     <PropertyGroup>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
         <ModelContextProtocolVersion>0.4.0-preview.3</ModelContextProtocolVersion>
+        <RuntimeLibraryVersion>10.0.0-rc.2.25502.107</RuntimeLibraryVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0-rc.2.25502.107" />
-        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.0-rc.2.25502.107" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(RuntimeLibraryVersion)" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="$(RuntimeLibraryVersion)" />
         <!--#if (TransportMethod == "streamable-http") -->
         <PackageVersion Include="ModelContextProtocol.AspNetCore" Version="$(ModelContextProtocolVersion)" />
         <!--#else -->
